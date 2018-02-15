@@ -18,24 +18,24 @@ public class NoRestAPI {
         return "Hello World !!!";
     }
 
-    public String printName() {
-        return "Name is Prasanna";
+    public String getStudent() {
+        return "Fetched Student";
     }
 
-    public String sessionName() {
-        return "REST API Documentation";
+    public String getCollege() {
+        return "Fetched College";
     }
 
     @PostMapping("/invoke")
-    public String isItARestMethod(@RequestBody String methodName) {
-        methodName = methodName.trim();
-        System.out.println("Method name is "+methodName);
-        if (methodName.trim().equals("helloWorld"))
+    public String isItARestMethod(@RequestBody String resource) {
+        resource = resource.trim();
+        System.out.println("Method name is "+resource);
+        if (resource.trim().equals("helloWorld"))
             return helloWorld();
-        else if (methodName.equals("printName"))
-            return printName();
-        else if (methodName.equals("sessionName"))
-            return sessionName();
+        else if (resource.equals("getStudent"))
+            return getStudent();
+        else if (resource.equals("getCollege"))
+            return getCollege();
         return "Not a valid method";
     }
 }
