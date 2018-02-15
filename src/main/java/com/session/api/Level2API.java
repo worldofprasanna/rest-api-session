@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.QueryParam;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -48,8 +50,12 @@ class Level2StudentAPI {
 class Level2CollegeAPI {
 
     @GetMapping
-    ResponseEntity<String> getCollege() {
+    ResponseEntity<String> getCollege(@QueryParam("id") int id) {
         System.out.println("Getting a College");
+
+        if (id > 10)
+            return ResponseEntity.badRequest().body("Please enter value less than 10");
+
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
                 .body("Fetched a College");
